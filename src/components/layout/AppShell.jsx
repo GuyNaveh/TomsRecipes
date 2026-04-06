@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { VIEWS } from '../../utils/constants.js';
+import { useSettings } from '../../hooks/useSettings.js';
+import { useAuth } from '../../hooks/useAuth.js';
+import { storage } from '../../storage/storage.js';
 import NavBar from './NavBar.jsx';
 import PageContainer from './PageContainer.jsx';
 import RecipeList from '../recipes/RecipeList.jsx';
@@ -21,14 +24,17 @@ function ViewContent({ view }) {
 
 export default function AppShell() {
   const [view, setView] = useState(VIEWS.RECIPES);
+  const { settings } = useSettings();
+  const { user, signOut } = useAuth();
 
   return (
     <div className="min-h-screen bg-background">
       <NavBar
         view={view}
         onViewChange={setView}
-        storageMode="local"
-        user={null}
+        storageMode={storage.getStorageMode()}
+        user={user}
+        onSignOut={signOut}
       />
       <PageContainer>
         <ViewContent view={view} />

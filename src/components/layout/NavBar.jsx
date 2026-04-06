@@ -7,7 +7,7 @@ const navItems = [
   { view: VIEWS.SETTINGS, label: 'הגדרות' },
 ];
 
-export default function NavBar({ view, onViewChange, storageMode = 'local', user = null }) {
+export default function NavBar({ view, onViewChange, storageMode = 'local', user = null, onSignOut }) {
   return (
     <nav className="sticky top-0 z-40 bg-slate-900 border-b border-slate-700/50">
       <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between gap-4">
@@ -55,7 +55,7 @@ export default function NavBar({ view, onViewChange, storageMode = 'local', user
               <button
                 type="button"
                 className="px-2 py-1 rounded-lg text-xs bg-slate-700 hover:bg-slate-600 text-slate-300 hover:text-white transition-colors"
-                onClick={() => {}}
+                onClick={onSignOut}
                 aria-label="התנתק"
               >
                 יציאה
