@@ -1,9 +1,9 @@
 import React from 'react';
 import Card from '../ui/Card.jsx';
 import Button from '../ui/Button.jsx';
+import ShareButton from '../sharing/ShareButton.jsx';
 import { formatHebrewDate } from '../../utils/planHelpers.js';
 import { sumDailyNutrition } from '../../utils/nutrition.js';
-import { isSupabaseConfigured } from '../../api/supabase.js';
 import { MEAL_SLOTS } from '../../utils/constants.js';
 
 export default function DayPlanCard({
@@ -11,14 +11,12 @@ export default function DayPlanCard({
   recipes = [],
   cookNames = [],
   onEdit,
-  onShare,
   isToday: isTodayFlag = false,
 }) {
   if (!plan) return null;
 
   const meals = plan.meals || [];
   const nutrition = sumDailyNutrition(meals, recipes);
-  const showShare = isSupabaseConfigured() && typeof onShare === 'function';
 
   // Cook tally
   const tally = {};
@@ -90,11 +88,7 @@ export default function DayPlanCard({
         <Button variant="secondary" size="sm" onClick={() => onEdit && onEdit(plan.date)}>
           ערוך
         </Button>
-        {showShare && (
-          <Button variant="ghost" size="sm" onClick={() => onShare(plan)}>
-            שתף
-          </Button>
-        )}
+        <ShareButton type="plan" payload={plan} size="sm" />
       </div>
     </Card>
   );

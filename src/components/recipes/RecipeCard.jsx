@@ -3,6 +3,7 @@ import Card from '../ui/Card.jsx';
 import Button from '../ui/Button.jsx';
 import TagBadge from '../ui/TagBadge.jsx';
 import NutritionBar from '../ui/NutritionBar.jsx';
+import ShareButton from '../sharing/ShareButton.jsx';
 import { SIDE_DISH_COLOR } from '../../utils/constants.js';
 
 const MAX_VISIBLE_TAGS = 3;
@@ -92,19 +93,7 @@ export default function RecipeCard({ recipe, onEdit, onDelete, onShare, onView }
         >
           🗑️ מחיקה
         </Button>
-        {onShare && (
-          <Button
-            size="sm"
-            variant="ghost"
-            className="text-xs mr-auto"
-            onClick={(e) => {
-              e.stopPropagation();
-              onShare && onShare(recipe);
-            }}
-          >
-            🔗 שיתוף
-          </Button>
-        )}
+        <ShareButton type="recipe" payload={recipe} className="mr-auto" />
       </div>
     </Card>
   );
