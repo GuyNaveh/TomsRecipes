@@ -3,6 +3,7 @@ import { VIEWS } from '../../utils/constants.js';
 import { useSettings } from '../../hooks/useSettings.js';
 import { useAuth } from '../../hooks/useAuth.js';
 import { storage } from '../../storage/storage.js';
+import { AppProvider } from '../../context/AppContext.jsx';
 import NavBar from './NavBar.jsx';
 import PageContainer from './PageContainer.jsx';
 import RecipeList from '../recipes/RecipeList.jsx';
@@ -37,7 +38,9 @@ export default function AppShell() {
         onSignOut={signOut}
       />
       <PageContainer>
-        <ViewContent view={view} />
+        <AppProvider>
+          <ViewContent view={view} />
+        </AppProvider>
       </PageContainer>
     </div>
   );
